@@ -66,6 +66,18 @@ explore: orders {
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
+
+  aggregate_table: rollup__users_state {
+    query: {
+      dimensions: [users.state]
+      measures: [users.count]
+    }
+
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+  }
+
 }
 
 explore: products {
