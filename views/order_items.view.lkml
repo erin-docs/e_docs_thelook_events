@@ -96,6 +96,12 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+
+  measure: wholesale_value {
+    type: number
+    sql: (${TABLE}.sale_price * 0.60) ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

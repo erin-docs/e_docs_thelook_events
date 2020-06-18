@@ -89,3 +89,36 @@ explore: products {
 }
 
 explore: users {}
+
+
+
+
+
+# explore: +orders {
+#   aggregate_table: rollup__users_state__0 {
+#     query: {
+#       dimensions: [users.state]
+#       measures: [users.count]
+#     }
+#
+#     materialization: {
+#       datagroup_trigger: orders_datagroup
+#     }
+#   }
+#
+#   aggregate_table: rollup__order_items_created_date__products_category__1 {
+#     query: {
+#       dimensions: [order_items.created_date, products.category]
+#       measures: [order_items.count]
+#       filters: [
+#         order_items.created_date: "7 weeks",
+#         products.category: "Accessories,Blazers & Jackets,Fashion Hoodies & Sweatshirts,Shorts,Sweaters,Skirts"
+#       ]
+#       timezone: "America/Los_Angeles"
+#     }
+#
+#     materialization: {
+#       datagroup_trigger: orders_datagroup
+#     }
+#   }
+# }
