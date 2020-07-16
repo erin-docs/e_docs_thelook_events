@@ -2,20 +2,9 @@ connection: "thelook_events"
 
 include: "/explores/agg-aware-explore.lkml"
 
-explore: users_extended {}
-explore: user_with_age_extension {
-}
-
-
 # include all the views
 include: "/views/**/*.view"
 
-datagroup: orders_datagroup {
-  sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
-
-persist_with: orders_datagroup
 
 explore: distribution_centers {}
 
@@ -92,33 +81,47 @@ explore: users {}
 
 
 
+# Place in `e_thelook` model
+explore: +orders {
+  aggregate_table: rollup__users_state__0 {
+    query: {
+      dimensions: [users.state]
+      measures: [users.count]
+    }
+
+materialization: {
+  datagroup_trigger: orders_datagroup
+}
+}
+
+}
 
 
-# explore: +orders {
-#   aggregate_table: rollup__users_state__0 {
-#     query: {
-#       dimensions: [users.state]
-#       measures: [users.count]
-#     }
-#
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
-#
-#   aggregate_table: rollup__order_items_created_date__products_category__1 {
-#     query: {
-#       dimensions: [order_items.created_date, products.category]
-#       measures: [order_items.count]
-#       filters: [
-#         order_items.created_date: "7 weeks",
-#         products.category: "Accessories,Blazers & Jackets,Fashion Hoodies & Sweatshirts,Shorts,Sweaters,Skirts"
-#       ]
-#       timezone: "America/Los_Angeles"
-#     }
-#
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
-# }
+# Place in `e_thelook` model
+  explore: +orders {
+    aggregate_table: rollup__users_state__0 {
+      query: {
+        dimensions: [users.city]
+        measures: [users.count]
+      }
+
+      materialization: {
+        datagroup_trigger: orders_datagroup
+      }
+}}
+
+
+
+
+    explore: users_extended {}
+    explore: user_with_age_extension {
+    }
+
+
+
+    datagroup: orders_datagroup {
+      sql_trigger: SELECT MAX(id) FROM etl_log;;
+      max_cache_age: "1 hour"
+    }
+
+    persist_with: orders_datagroup

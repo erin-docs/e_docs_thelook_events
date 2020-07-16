@@ -39,20 +39,22 @@ explore: order_items {
 
 }
 
-# # Place in `e_thelook` model
-# explore: +order_items {
-#   aggregate_table: rollup__sale_price {
-#     query: {
-#       dimensions: [sale_price]
-#       measures: [total_sales]
-#       timezone: "America/Los_Angeles"
-#     }
-#
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
-# }
+# Place in `e_thelook` model
+explore: +order_items {
+  aggregate_table: rollup__sale_price {
+    query: {
+      dimensions: [sale_price]
+      measures: [total_sales]
+      timezone: "America/Los_Angeles"
+    }
+
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+  }
+}
+
+
 
 
 # For Aggregate Awareness
