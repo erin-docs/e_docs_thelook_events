@@ -1,8 +1,6 @@
 connection: "thelook_events"
 
 include: "/views/products.view"
-include: "/views/orders/order_history.view"
-include: "/views/users/*.view"
 
 
 explore: distribution_centers {}
