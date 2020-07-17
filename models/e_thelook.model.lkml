@@ -1,6 +1,5 @@
 connection: "thelook_events"
 
-include: "/explores/agg-aware-explore.lkml"
 
 # include all the views
 include: "/views/**/*.view"
@@ -79,6 +78,9 @@ explore: products {
 
 explore: users {}
 
+
+
+include: "/explores/agg-aware-explore.lkml"
 
 
 # Place in `e_thelook` model
