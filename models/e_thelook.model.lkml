@@ -1,8 +1,8 @@
 connection: "thelook_events"
 
-
-# include all the views
-include: "/views/**/*.view"
+include: "/views/products.view"
+include: "/views/orders/order_history.view"
+include: "/views/users/*.view"
 
 
 explore: distribution_centers {}
@@ -79,7 +79,8 @@ explore: products {
 explore: users {}
 
 
-
+# include all the views
+include: "/views/**/*.view"
 include: "/explores/agg-aware-explore.lkml"
 
 
