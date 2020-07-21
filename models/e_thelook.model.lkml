@@ -1,17 +1,5 @@
 connection: "thelook_events"
-
 include: "/views/products.view"
-
-
-explore: distribution_centers {}
-
-explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
 
 explore: inventory_items {
   join: products {
@@ -23,6 +11,18 @@ explore: inventory_items {
   join: distribution_centers {
     type: left_outer
     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
+    relationship: many_to_one
+  }
+}
+
+
+
+explore: distribution_centers {}
+
+explore: events {
+  join: users {
+    type: left_outer
+    sql_on: ${events.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
