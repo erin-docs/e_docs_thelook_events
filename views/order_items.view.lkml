@@ -36,6 +36,7 @@ view: order_items {
     sql: ${TABLE}.delivered_at ;;
   }
 
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -95,7 +96,6 @@ view: order_items {
     type: count
     drill_fields: [detail*]
   }
-
 
   measure: wholesale_value {
     type: number

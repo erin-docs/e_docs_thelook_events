@@ -1,6 +1,16 @@
 connection: "thelook_events"
 include: "/views/products.view"
 
+
+
+# include all the views
+include: "/views/**/*.view"
+# include: "/explores/agg-aware-explore.lkml"
+
+#explore: +order_items {}
+
+explore: order_items {}
+
 explore: inventory_items {
   join: products {
     type: left_outer
@@ -75,11 +85,6 @@ explore: products {
 }
 
 explore: users {}
-
-
-# include all the views
-include: "/views/**/*.view"
-include: "/explores/agg-aware-explore.lkml"
 
 
 # Place in `e_thelook` model
