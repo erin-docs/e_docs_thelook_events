@@ -5,25 +5,25 @@ include: "/views/products.view"
 
 # include all the views
 include: "/views/**/*.view"
-# include: "/explores/agg-aware-explore.lkml"
+include: "/explores/agg-aware-explore.lkml"
 
 #explore: +order_items {}
 
-explore: order_items {}
+# explore: order_items {}
 
-explore: inventory_items {
-  join: products {
-    type: left_outer
-    sql_on: ${inventory_items.product_id} = ${products.id} ;;
-    relationship: many_to_one
-  }
+# explore: inventory_items {
+#   join: products {
+#     type: left_outer
+#     sql_on: ${inventory_items.product_id} = ${products.id} ;;
+#     relationship: many_to_one
+#   }
 
-  join: distribution_centers {
-    type: left_outer
-    sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
-    relationship: many_to_one
-  }
-}
+#   join: distribution_centers {
+#     type: left_outer
+#     sql_on: ${products.distribution_center_id} = ${distribution_centers.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 
 
