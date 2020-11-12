@@ -9,35 +9,36 @@ view: +order_items {
   }
 }
 
+
 # For Turtles
-# explore: order_items {
-# #  label: "Sales Totals"
-#   query: sales_quarterly {
-# # group_label: "New Section"
-#     description: "Description for Info hover"
-#     label: "Quarterly Sales Totals"
-#     dimensions: [order_items.created_quarter]
-#     measures: [order_items.total_sales]
-#     pivots: [order_items.created_quarter]
-#     sorts: [order_items.total_sales: asc]
-# #     timezone: query_timezone
-#     filters: [order_items.created_year: "2019"]
-#     limit: 3
-#   }
+explore: order_items {
+ label: "Sales Totals Turtles"
+  query: sales_quarterly {
+# group_label: "New Section"
+    description: "Description for Info hover"
+    label: "Quarterly Sales Totals"
+    dimensions: [order_items.created_at_quarter]
+    measures: [order_items.total_sales]
+    pivots: [order_items.created_at_quarter]
+    sorts: [order_items.total_sales: asc]
+#     timezone: query_timezone
+    filters: [order_items.created_at_year: "2019"]
+    limit: 3
+  }
 
-#   fields: [user_id,
-#     order_items.sale_price,
-#     order_items.created_date,
-#     order_items.created_time,
-#     order_items.created_week,
-#     order_items.created_month,
-#     order_items.created_quarter,
-#     order_items.created_year,
-#     order_items.count,
-#     order_items.total_sales,
-#     order_items.wholesale_value]
+  fields: [user_id,
+    order_items.sale_price,
+    order_items.created_at_date,
+    order_items.created_at_time,
+    order_items.created_at_week,
+    order_items.created_at_month,
+    order_items.created_at_quarter,
+    order_items.created_at_year,
+    order_items.count,
+    order_items.total_sales,
+    wholesale_value_from_dimension]
 
-# }
+}
 
 # Place in `e_thelook` model
 explore: +order_items {
@@ -45,7 +46,6 @@ explore: +order_items {
     query: {
       dimensions: [sale_price]
       measures: [total_sales]
-      timezone: "America/Los_Angeles"
     }
 
     materialization: {
@@ -59,28 +59,30 @@ explore: +order_items {
 
 # For Aggregate Awareness
 
-explore: order_items {
+explore: order_items_aggaware {
+  view_name: order_items
   label: "Sales Totals"
   fields: [user_id,
     order_items.sale_price,
-    order_items.created_date,
-    order_items.created_time,
-    order_items.created_week,
-    order_items.created_month,
-    order_items.created_quarter,
-    order_items.created_year,
+    order_items.sale_price,
+    order_items.created_at_date,
+    order_items.created_at_time,
+    order_items.created_at_week,
+    order_items.created_at_month,
+    order_items.created_at_quarter,
+    order_items.created_at_year,
     order_items.count,
     order_items.total_sales]
 
   join: users {
-    sql_on: ${users.id} = ${order_items.user_id} ;;
+    sql_on: ${users.id} = ${order_items.id} ;;
     relationship: one_to_many
   }
 
 
   aggregate_table: sales_weekly {
     query: {
-      dimensions: [order_items.created_week]
+      dimensions: [order_items.created_at_week]
       measures: [order_items.total_sales]
     }
     materialization: {
@@ -90,7 +92,7 @@ explore: order_items {
 
   aggregate_table: sales_daily {
     query:  {
-      dimensions: [order_items.created_date]
+      dimensions: [order_items.created_at_date]
       measures: [order_items.total_sales]
     }
     materialization: {
@@ -104,7 +106,7 @@ explore: order_items {
       datagroup_trigger: orders_datagroup
     }
     query: {
-      dimensions: [order_items.created_month]
+      dimensions: [order_items.created_at_month]
       measures: [order_items.total_sales]
 
     }
@@ -113,7 +115,7 @@ explore: order_items {
 
   aggregate_table: sales_last_weekly {
     query:  {
-      dimensions: [order_items.created_week]
+      dimensions: [order_items.created_at_week]
       measures: [order_items.total_sales]
     }
     materialization: {

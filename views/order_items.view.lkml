@@ -1,5 +1,4 @@
 view: order_items {
-  sql_table_name: public.order_items ;;
   drill_fields: [id]
 
   dimension: id {
@@ -8,7 +7,7 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
-  dimension_group: created {
+  dimension_group: created_at {
     type: time
     timeframes: [
       raw,
@@ -19,7 +18,6 @@ view: order_items {
       quarter,
       year
     ]
-    sql: ${TABLE}.created_at ;;
   }
 
   dimension_group: delivered {
@@ -97,10 +95,41 @@ view: order_items {
     drill_fields: [detail*]
   }
 
-  measure: wholesale_value {
-    type: number
-    sql: (${TABLE}.sale_price * 0.60) ;;
+
+  dimension: amount_sale_price {
+    sql: (${TABLE}.sale_price) ;;
   }
+
+  measure: wholesale_value_measure {
+    type: number
+    sql: (${sale_price} * 0.60) ;;
+  }
+
+
+  dimension: total_sale_price {
+    sql: (${TABLE}.total_sale_price) ;;
+  }
+
+  measure: wholesale_value_from_dimension{
+    type: number
+    sql: (${total_sale_price} * 0.60) ;;
+  }
+
+
+  dimension: amount_dimension {
+    sql: (${TABLE}.amount) ;;
+  }
+
+  measure: average_amount {
+    type: average
+    sql: ${TABLE}.amount ;;
+  }
+
+  measure: average_amount_from_dimension {
+    type: average
+    sql: ${amount_dimension} ;;
+  }
+
 
   # ----- Sets of fields for drilling ------
   set: detail {
