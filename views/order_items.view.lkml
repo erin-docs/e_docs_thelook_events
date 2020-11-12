@@ -61,6 +61,7 @@ view: order_items {
   }
 
   dimension: sale_price {
+    label: "okrrrrr"
     type: number
     sql: ${TABLE}.sale_price ;;
   }
