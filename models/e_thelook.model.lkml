@@ -1,4 +1,4 @@
-connection: "thelook_events"
+connection: "red_look"
 include: "/views/products.view"
 
 
