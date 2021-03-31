@@ -84,6 +84,7 @@ explore: order_items_aggaware {
     query: {
       dimensions: [order_items.created_at_week]
       measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
     }
     materialization: {
       datagroup_trigger: orders_datagroup
@@ -94,7 +95,8 @@ explore: order_items_aggaware {
     query:  {
       dimensions: [order_items.created_at_date]
       measures: [order_items.total_sales]
-    }
+      timezone: America/Los_Angeles
+      }
     materialization: {
       datagroup_trigger: orders_datagroup
     }
@@ -108,6 +110,7 @@ explore: order_items_aggaware {
     query: {
       dimensions: [order_items.created_at_month]
       measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
 
     }
   }
@@ -117,7 +120,8 @@ explore: order_items_aggaware {
     query:  {
       dimensions: [order_items.created_at_week]
       measures: [order_items.total_sales]
-    }
+      timezone: America/Los_Angeles
+      }
     materialization: {
       datagroup_trigger: orders_datagroup
     }
