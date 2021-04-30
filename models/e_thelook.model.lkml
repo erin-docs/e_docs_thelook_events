@@ -25,6 +25,7 @@ include: "/explores/agg-aware-explore.lkml"
 #   }
 # }
 
+include: "/views/products.view"
 
 
 explore: distribution_centers {}
