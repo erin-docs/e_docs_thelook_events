@@ -3,6 +3,34 @@ include: "/views/products.view"
 
 
 
+include: "//e_redlook/views/product_facts.view"
+explore: product_facts {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # include all the views
 include: "/views/**/*.view"
 include: "/explores/agg-aware-explore.lkml"

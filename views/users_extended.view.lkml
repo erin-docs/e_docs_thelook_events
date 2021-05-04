@@ -8,7 +8,7 @@ view: users_extended {
     sql: ${TABLE}.first_name ;;
   }
 
-   dimension: zip {
-    type: number
-  }
+  # dimension: zip {
+  #   type: number
+  # }
 }
