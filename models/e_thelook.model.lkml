@@ -33,6 +33,7 @@ include: "/explores/agg-aware-explore.lkml"
 
 include: "/views/products.view"
 
+explore: order_facts {}
 
 explore: distribution_centers {}
 
@@ -88,9 +89,7 @@ explore: orders {
   #   materialization: {
   #     datagroup_trigger: orders_datagroup
   #   }
-  # }
-
-}
+  }
 
 explore: products {
   join: distribution_centers {
@@ -103,34 +102,34 @@ explore: products {
 explore: users {}
 
 
-# Place in `e_thelook` model
-explore: +orders {
-  aggregate_table: rollup__users_state__0 {
-    query: {
-      dimensions: [users.state]
-      measures: [users.count]
-    }
+# # Place in `e_thelook` model
+# explore: +orders {
+#   aggregate_table: rollup__users_state__0 {
+#     query: {
+#       dimensions: [users.state]
+#       measures: [users.count]
+#     }
 
-materialization: {
-  datagroup_trigger: orders_datagroup
-}
-}
+# materialization: {
+#   datagroup_trigger: orders_datagroup
+# }
+# }
+# }
 
-}
 
 
-# Place in `e_thelook` model
-  explore: +orders {
-    aggregate_table: rollup__users_state__0 {
-      query: {
-        dimensions: [users.city]
-        measures: [users.count]
-      }
+# # Place in `e_thelook` model
+#   explore: +orders {
+#     aggregate_table: rollup__users_state__0 {
+#       query: {
+#         dimensions: [users.city]
+#         measures: [users.count]
+#       }
 
-      materialization: {
-        datagroup_trigger: orders_datagroup
-      }
-}}
+#       materialization: {
+#         datagroup_trigger: orders_datagroup
+#       }
+# }}
 
 
 
