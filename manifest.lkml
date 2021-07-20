@@ -1,5 +1,5 @@
-project_name: "e_thelook"
+# project_name: "e_thelook"
 
-local_dependency: {
- project: "e_redlook"
-}
+# local_dependency: {
+# project: "e_redlook"
+# }

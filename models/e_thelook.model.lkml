@@ -3,30 +3,8 @@ include: "/views/products.view"
 
 
 
-include: "//e_redlook/views/product_facts.view"
-explore: product_facts {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# include: "//e_redlook/views/product_facts.view"
+# explore: product_facts {}
 
 
 
