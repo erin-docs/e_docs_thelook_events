@@ -79,16 +79,16 @@ explore: orders {
     relationship: many_to_one
   }
 
-  aggregate_table: rollup__users_state {
-    query: {
-      dimensions: [users.state]
-      measures: [users.count]
-    }
+  # aggregate_table: rollup__users_state {
+  #   query: {
+  #     dimensions: [users.state]
+  #     measures: [users.count]
+  #   }
 
-    materialization: {
-      datagroup_trigger: orders_datagroup
-    }
-  }
+  #   materialization: {
+  #     datagroup_trigger: orders_datagroup
+  #   }
+  # }
 
 }
 
