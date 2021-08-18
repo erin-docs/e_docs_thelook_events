@@ -7,8 +7,6 @@ include: "/views/products.view"
 # explore: product_facts {}
 
 
-
-
 # include all the views
 include: "/views/**/*.view"
 include: "/explores/agg-aware-explore.lkml"
