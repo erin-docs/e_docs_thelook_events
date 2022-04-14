@@ -7,6 +7,10 @@ include: "/views/products.view"
 # explore: product_facts {}
 
 
+datagroup: e_look_bq_default_datagroup {
+  sql_trigger: SELECT MAX(id) FROM etl_log;;
+  max_cache_age: "1 hour"
+}
 
 
 # include all the views
@@ -132,6 +136,37 @@ explore: users {}
 # }}
 
 
+
+
+# agg_table
+explore: order_items {
+  join: orders {
+    #_each
+    type: left_outer
+    sql_on: ${order_items.order_id} = ${orders.id} ;;
+    relationship: many_to_one
+  }
+
+  join: users {
+    #_each
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+}
+
+explore: +order_items {
+  aggregate_table: rollup__orders_created_date {
+    query: {
+      dimensions: [orders.created_date]
+      measures: [average_amount]
+    }
+
+    materialization: {
+      datagroup_trigger: e_look_bq_default_datagroup
+    }
+  }
+}
 
 
     explore: users_extended {}
