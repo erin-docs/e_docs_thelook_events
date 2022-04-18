@@ -1,13 +1,13 @@
-# include: "/views/*.lkml"
+include: "/views/*.lkml"
 
 
-# view: +order_items {
-#   measure: total_sales {
-#     type: sum
-#     value_format_name: usd
-#     sql: ${order_items.sale_price} ;;
-#   }
-# }
+view: +order_items {
+  measure: total_sales {
+    type: sum
+    value_format_name: usd
+    sql: ${order_items.sale_price} ;;
+  }
+}
 
 
 # # For Turtles
@@ -57,73 +57,73 @@
 
 
 
-# # For Aggregate Awareness
+# For Aggregate Awareness
 
-# explore: order_items_aggaware {
-#   view_name: order_items
-#   label: "Sales Totals"
-#   fields: [user_id,
-#     order_items.sale_price,
-#     order_items.sale_price,
-#     order_items.created_at_date,
-#     order_items.created_at_time,
-#     order_items.created_at_week,
-#     order_items.created_at_month,
-#     order_items.created_at_quarter,
-#     order_items.created_at_year,
-#     order_items.count,
-#     order_items.total_sales]
+explore: order_items_aggaware {
+  view_name: order_items
+  label: "Sales Totals"
+  fields: [user_id,
+    order_items.sale_price,
+    order_items.sale_price,
+    order_items.created_at_date,
+    order_items.created_at_time,
+    order_items.created_at_week,
+    order_items.created_at_month,
+    order_items.created_at_quarter,
+    order_items.created_at_year,
+    order_items.count,
+    order_items.total_sales]
 
-#   join: users {
-#     sql_on: ${users.id} = ${order_items.id} ;;
-#     relationship: one_to_many
-#   }
-
-
-#   aggregate_table: sales_weekly {
-#     query: {
-#       dimensions: [order_items.created_at_week]
-#       measures: [order_items.total_sales]
-#       timezone: America/Los_Angeles
-#     }
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
-
-#   aggregate_table: sales_daily {
-#     query:  {
-#       dimensions: [order_items.created_at_date]
-#       measures: [order_items.total_sales]
-#       timezone: America/Los_Angeles
-#       }
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
+  join: users {
+    sql_on: ${users.id} = ${order_items.id} ;;
+    relationship: one_to_many
+  }
 
 
-#   aggregate_table: sales_monthly {
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#     query: {
-#       dimensions: [order_items.created_at_month]
-#       measures: [order_items.total_sales]
-#       timezone: America/Los_Angeles
+  aggregate_table: sales_weekly {
+    query: {
+      dimensions: [order_items.created_at_week]
+      measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
+    }
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+  }
 
-#     }
-#   }
+  aggregate_table: sales_daily {
+    query:  {
+      dimensions: [order_items.created_at_date]
+      measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
+      }
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+  }
 
 
-#   aggregate_table: sales_last_weekly {
-#     query:  {
-#       dimensions: [order_items.created_at_week]
-#       measures: [order_items.total_sales]
-#       timezone: America/Los_Angeles
-#       }
-#     materialization: {
-#       datagroup_trigger: orders_datagroup
-#     }
-#   }
-# }
+  aggregate_table: sales_monthly {
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+    query: {
+      dimensions: [order_items.created_at_month]
+      measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
+
+    }
+  }
+
+
+  aggregate_table: sales_last_weekly {
+    query:  {
+      dimensions: [order_items.created_at_week]
+      measures: [order_items.total_sales]
+      timezone: America/Los_Angeles
+      }
+    materialization: {
+      datagroup_trigger: orders_datagroup
+    }
+  }
+}
