@@ -1,6 +1,6 @@
 # Docs Notes
 
-## DO NOT COMMIT CHANGES FOR JON ALLEN ** I need to have unbuilt PDTs in Dev Mode and if you push his dev branch, those PDTs will get built
+## DO NOT COMMIT CHANGES FOR USER [JON ALLEN](https://docslatest.cloud.looker.com/admin/users/117/edit) ** I need to have unbuilt PDTs in Dev Mode and if you push his dev branch, those PDTs will get built
 
 Using this project for:
 
